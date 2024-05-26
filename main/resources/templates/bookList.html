@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* Custom styles */
+    /* Button styles */
+    .btn-primary {
+      background-color: #3498db;
+      border-color: #3498db;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #2980b9;
+      border-color: #2980b9;
+    }
+
+    /* Table styling */
+    .table {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .table thead th {
+      background-color: #3498db;
+      color: #fff;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+      background-color: #f8f9fa;
+    }
+
+    .table-hover tbody tr:hover {
+      background-color: #e9ecef;
+    }
+
+    /* Form styling */
+    .form-control {
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Font styles */
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+
+    /* Icon styles */
+    .fa-trash {
+      color: red;
+      transition: all 0.3s ease;
+    }
+
+    .fa-trash:hover {
+      transform: scale(1.2);
+    }
+
+    /* Glow effect for "Add To Mybook" button */
+    .btn-add-to-mybook {
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 0, 255, 0.5); /* Adjust the shadow color and intensity as needed */
+    }
+
+    .btn-add-to-mybook:hover {
+      box-shadow: 0 0 20px rgba(0, 0, 255, 0.7); /* Increase the shadow size on hover */
+    }
+  </style>
+  <title>Book Store</title>
+  <script src="https://kit.fontawesome.com/0faddc1af8.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/Book">EMSI BOOKS</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/Book">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="available_books">Available Books</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="my_books">My Books</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="book_register">New Book Register</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container my-5 col-md-8">
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Author</th>
+      <th scope="col">Price</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="b :${book}">
+      <td th:text="${b.id}"></td>
+      <td th:text="${b.name}"></td>
+      <td th:text="${b.author}"></td>
+      <td th:text="${b.price}"></td>
+      <td>
+        <a class="btn btn-secondary btn-sm btn-add-to-mybook" th:href="@{/mylist/{id}(id=${b.id})}">Add To Mybook</a>
+        <a style="color:blue" th:href="@{/editBook/{id}(id=${b.id})}"><i class="fa-solid fa-pen-to-square ms-4"></i></a>
+        <a style="color:red" th:href="@{/deleteBook/{id}(id=${b.id})}"><i class="fa-solid fa-trash ms-4"></i></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+</body>
+</html>
